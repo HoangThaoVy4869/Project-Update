@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache
+Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/index.jsp" />
+    </definition>
+    <definition name="addExpense" extends="baseLayout">
+        <put-attribute name="title" value="Them moi chi tieu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/addExpense.jsp" />
+    </definition>
+    <definition name="updateExpense" extends="baseLayout">
+        <put-attribute name="title" value="Sua chi tieu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/editExpense.jsp" />
+    </definition>
+    <definition name="detailsExpense" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiet chi tieu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/detailsExpense.jsp" />
+    </definition>
+    <definition name="statsExpense" extends="baseLayout">
+        <put-attribute name="title" value="Thong ke bao cao chi" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/statsExpense.jsp" />
+    </definition>
+    
+    
+    <definition name="listIncome" extends="baseLayout">
+        <put-attribute name="title" value="Danh sach thu nhap" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/listIncome.jsp" />
+    </definition>
+    <definition name="addIncome" extends="baseLayout">
+        <put-attribute name="title" value="Them moi thu nhap" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/addIncome.jsp" />
+    </definition>
+        <definition name="updateIncome" extends="baseLayout">
+        <put-attribute name="title" value="Sua thu nhap" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/editIncome.jsp" />
+    </definition>
+    <definition name="detailsIncome" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiet thu nhap" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/detailsIncome.jsp" />
+    </definition>
+    <definition name="statsIncome" extends="baseLayout">
+        <put-attribute name="title" value="Thong ke bao cao thu nhap" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/statsIncome.jsp" />
+    </definition>
+    
+    
+    <definition name="listUserGroup" extends="baseLayout">
+        <put-attribute name="title" value="Them user vao nhom" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/listUserGroup.jsp" />
+    </definition>
+    <definition name="listTeam" extends="baseLayout">
+        <put-attribute name="title" value="Tham gia nhom" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/listTeam.jsp" />
+    </definition>
+
+    
+</tiles-definitions>
