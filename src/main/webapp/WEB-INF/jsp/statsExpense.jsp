@@ -7,7 +7,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1>THỐNG KÊ KHOẢN CHI THEO THỜI GIAN</h1>
+<h1 style="text-align: center">THỐNG KÊ KHOẢN CHI THEO THỜI GIAN</h1>
 
 <div>
   <canvas id="myExpenseChart"></canvas>
@@ -18,23 +18,29 @@
         <label>Từ thời điểm</label>
         <input type="date" name="fromDate" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 10px">
         <label>Đến thời điểm</label>
         <input type="date" name="toDate" class="form-control">
     </div>
     <input type="submit" value="Thống kê" class="btn btn-success">
 </form>
+<br />
+<select id="cars">
+    <option value="thang"><a href="/statsExpenseMonth">Tháng</a></option>
+    <option value="quy"><a href="#">Quý</a></option>
+    <option value="nam"><a href="#">Năm</a></option>
+</select>
 
 <table class="table">
     <tr>
-        <th>Id</th>
+        <th>STT</th>
         <th>Tên khoản chi</th>
         <th>Số tiền</th>
         <th>Ngày chi</th>
     </tr>
-    <c:forEach items="${statsExpense}" var="s">
+    <c:forEach items="${statsExpense}" var="s" varStatus="loop">
         <tr>
-            <td>${s[0]}</td>
+            <td>${loop.count}</td>
             <td>${s[1]}</td>
             <td>${s[2]} VNĐ</td>
             <td>${s[3]}</td>

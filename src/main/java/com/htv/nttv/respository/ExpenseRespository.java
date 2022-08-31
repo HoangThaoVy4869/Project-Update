@@ -15,11 +15,14 @@ import java.util.Map;
  * @author USER
  */
 public interface ExpenseRespository {
-    List<Expense> getExpense(Map<String, String> params, int page);
+    List<Expense> getExpense(Map<String, String> params, int page, String kw);
     boolean addExpense(Expense em);
     boolean updateExpense(Expense em);
     boolean deleteExpense(int id);
     int countExpense();
     List<Object[]> statsExpense(Date fromDate, Date toDate);
     Expense geExpenseById(int id);
+    List<Object[]> statsExpenseMonth(Date fromDate);
+//Date myDate = new Date();
+//int quarter = (myDate.getMonth() / 3) + 1;
 }

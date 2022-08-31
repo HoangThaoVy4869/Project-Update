@@ -39,6 +39,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/statsExpense.jsp" />
     </definition>
+    <definition name="statsExpenseMonth" extends="baseLayout">
+        <put-attribute name="title" value="Thong ke bao cao chi theo thang" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/statsExpenseMonth.jsp" />
+    </definition>
     
     
     <definition name="listIncome" extends="baseLayout">
@@ -66,8 +71,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/statsIncome.jsp" />
     </definition>
-    
-    
+
     <definition name="listUserGroup" extends="baseLayout">
         <put-attribute name="title" value="Them user vao nhom" />
         <put-attribute name="content"
@@ -78,6 +82,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/listTeam.jsp" />
     </definition>
-
+    <definition name="login" template="/WEB-INF/jsp/login.jsp">
+        <put-attribute name="title" value="Dang nhap vao trang chu" />
+    </definition>
+    <definition name="register" template="/WEB-INF/jsp/register.jsp">
+        <put-attribute name="title" value="Dang ky nguoi dung" />
+    </definition>
     
 </tiles-definitions>

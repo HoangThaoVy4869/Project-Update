@@ -24,8 +24,8 @@ public class IncomeServiceImpl implements IncomeService{
     private  IncomeRepository incomeRespository;
     
     @Override
-    public List<Income> getIncome(Map<String, String> params, int page) {
-        return this.incomeRespository.getIncome(params, page);   
+    public List<Income> getIncome(Map<String, String> params, int page, String kw) {
+        return this.incomeRespository.getIncome(params, page, kw);   
     }
     
     @Override

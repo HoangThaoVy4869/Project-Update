@@ -15,7 +15,7 @@ import java.util.Map;
  * @author USER
  */
 public interface IncomeService {
-    List<Income> getIncome(Map<String, String> params, int page);
+    List<Income> getIncome(Map<String, String> params, int page, String kw);
     boolean addIncome(Income in);
     boolean updateIncome(Income in);
     boolean deleteIncome(int id);

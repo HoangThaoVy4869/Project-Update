@@ -39,7 +39,7 @@ public class IncomeRepositoryImpl implements IncomeRepository{
     private Environment env;
 
     @Override
-    public List<Income> getIncome(Map<String, String> params, int page) {
+    public List<Income> getIncome(Map<String, String> params, int page, String kw) {
         Session session = this.SessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Income> q = b.createQuery(Income.class);
@@ -50,7 +50,7 @@ public class IncomeRepositoryImpl implements IncomeRepository{
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             
-            String kw = params.get("kw");
+//            String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
                 Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
                 predicates.add(p);

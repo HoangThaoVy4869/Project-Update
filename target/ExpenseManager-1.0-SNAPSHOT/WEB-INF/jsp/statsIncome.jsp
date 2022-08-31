@@ -27,14 +27,14 @@
 
 <table class="table">
     <tr>
-        <th>Id</th>
+        <th>STT</th>
         <th>Tên khoản thu nhập</th>
         <th>Số tiền</th>
         <th>Ngày thu nhập</th>
     </tr>
-    <c:forEach items="${statsIncome}" var="s">
+    <c:forEach items="${statsIncome}" var="s" varStatus="loop">
         <tr>
-            <td>${s[0]}</td>
+            <td>${loop.count}</td>
             <td>${s[1]}</td>
             <td>${s[2]} VNĐ</td>
             <td>${s[3]}</td>

@@ -39,3 +39,32 @@ function expenseChart(id, expenseLabels=[], expenseInfo=[]) {
     let ctx = document.getElementById(id).getContext('2d');
     new Chart(ctx, config)
 }
+function expenseChartMonth(id, expenseLabels=[], expenseInfo=[]) {
+    let colors = []
+    for (let i = 0; i < expenseInfo.length; i++)
+        colors.push(generateColor())
+    const data = {
+        labels: expenseLabels,
+        datasets: [{
+                label: 'Thống kê khoản chi theo tháng',
+                data: expenseInfo,
+                backgroundColor: colors,
+                borderColor: colors,
+                borderWidth: 1
+            }]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+    
+    let ctx = document.getElementById(id).getContext('2d');
+    new Chart(ctx, config)
+}

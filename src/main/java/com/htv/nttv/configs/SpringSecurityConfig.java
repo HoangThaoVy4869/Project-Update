@@ -1,0 +1,90 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.htv.nttv.configs;
+
+//import com.htv.nttv.handlers.LoginHandler;
+//import com.htv.nttv.handlers.LogoutHandler;
+import com.htv.nttv.handlers.LoginSuccessHandler;
+import com.htv.nttv.handlers.LogoutHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+/**
+ *
+ * @author DELL
+ */
+@Configuration
+@EnableWebSecurity
+@EnableTransactionManagement
+@ComponentScan(basePackages = {
+    "com.htv.nttv.controller",
+    "com.htv.nttv.respository",
+    "com.htv.nttv.service"
+})
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+    @Autowired
+    private AuthenticationSuccessHandler loginSuccessHandler;
+    @Autowired
+    private LogoutHandler logoutHandler;
+    
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
+    public AuthenticationSuccessHandler loginSuccessHandler() {
+        return new LoginSuccessHandler();
+    }
+    
+    @Bean
+    public LogoutHandler logoutHandler() {
+        return new LogoutHandler();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin().loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password");
+        
+
+        http.formLogin().defaultSuccessUrl("/")
+                .failureUrl("/login?error");
+        http.formLogin().successHandler(this.loginSuccessHandler);
+        
+//        http.logout().logoutSuccessUrl("/login");
+        http.logout().logoutSuccessHandler(this.logoutHandler);
+        http.exceptionHandling()
+                .accessDeniedPage("/login?accessDenied");
+//        http.authorizeRequests().antMatchers("/").permitAll()
+//                .antMatchers("/**/add")
+//                .access("hasRole('1')");//phan quyen
+//        .antMatchers("/**/pay")
+//                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+        http.csrf().disable();
+    }
+    
+}

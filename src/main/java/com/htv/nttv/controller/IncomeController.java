@@ -35,9 +35,9 @@ public class IncomeController {
 
     @GetMapping("/incomeList")
     public String index(Model model, @RequestParam Map<String, String> params) {
-      
+        String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("income", this.incomeService.getIncome(params, page));
+        model.addAttribute("income", this.incomeService.getIncome(params, page, kw));
         model.addAttribute("counter", this.incomeService.countIncome());
         return "listIncome";
     }
@@ -98,7 +98,7 @@ public class IncomeController {
     public String statsIncome(Model model, @RequestParam(required = false) Map<String, String> params){
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         
-        Date fromDate = null, toDate = null;
+        Date fromDate = new Date(), toDate = new Date();
         
         try {
             String d = params.getOrDefault("fromDate", null);

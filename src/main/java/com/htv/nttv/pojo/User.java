@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.htv.nttv.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -18,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,12 +34,25 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
-    @NamedQuery(name = "User.findByGender", query = "SELECT u FROM User u WHERE u.gender = :gender"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
+
+/**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,10 +79,10 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "phone")
-    private int phone;
-    @Size(max = 20)
-    @Column(name = "gender")
-    private String gender;
+    private String phone;
+//    @Size(max = 20)
+//    @Column(name = "gender")
+//    private String gender;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -85,10 +95,10 @@ public class User implements Serializable {
     private String password;
     @Column(name = "active")
     private Boolean active;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "user_role")
-    private boolean userRole;
+    private String userRole;
+    @Transient
+    private String confirmPassword;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<UserDetails> userDetailsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -103,7 +113,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, int phone, String username, String password, boolean userRole) {
+    public User(Integer id, String firstName, String lastName, String email, String phone, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -111,7 +121,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.username = username;
         this.password = password;
-        this.userRole = userRole;
+//        this.userRole = userRole;
     }
 
     public Integer getId() {
@@ -146,21 +156,21 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+//    public String getGender() {
+//        return gender;
+//    }
+//
+//    public void setGender(String gender) {
+//        this.gender = gender;
+//    }
 
     public String getUsername() {
         return username;
@@ -186,11 +196,11 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    public boolean getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(boolean userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 

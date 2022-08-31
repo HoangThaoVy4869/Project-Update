@@ -24,8 +24,8 @@ public class ExpenseServiceImpl implements ExpenseService{
     private  ExpenseRespository expenseRespository;
     
     @Override
-    public List<Expense> getExpense(Map<String, String> params, int page) {
-        return this.expenseRespository.getExpense(params, page);   
+    public List<Expense> getExpense(Map<String, String> params, int page, String kw) {
+        return this.expenseRespository.getExpense(params, page, kw);   
     }
     
     @Override
@@ -56,6 +56,11 @@ public class ExpenseServiceImpl implements ExpenseService{
     @Override
     public List<Object[]> statsExpense(Date fromDate, Date toDate) {
         return this.expenseRespository.statsExpense(fromDate, toDate);
+    }
+
+    @Override
+    public List<Object[]> statsExpenseMonth(Date fromDate) {
+        return this.expenseRespository.statsExpenseMonth(fromDate);
     }
 
     

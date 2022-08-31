@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 
 
@@ -71,5 +73,22 @@ public class HibernateConfig {
         transactionManager.setSessionFactory(
                 getSessionFactory().getObject());
         return transactionManager;
+    }
+    
+    @Bean
+    public JavaMailSender getMailSender() {
+        JavaMailSenderImpl mailSerder = new JavaMailSenderImpl();
+        mailSerder.setHost("smtp.gmail.com");
+        mailSerder.setPort(587);
+        mailSerder.setUsername("thuyvi76207@gmail.com");
+        mailSerder.setPassword("0985862060");
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.starttls.enable", "true");
+        javaMailProperties.put("mail.smtp.auth", "true");
+        javaMailProperties.put("mail.transport.protocol", "true");
+        javaMailProperties.put("mail.debug", "true");
+        
+        mailSerder.setJavaMailProperties(javaMailProperties);
+        return mailSerder;
     }
 }

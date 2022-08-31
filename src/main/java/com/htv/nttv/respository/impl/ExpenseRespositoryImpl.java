@@ -39,7 +39,7 @@ public class ExpenseRespositoryImpl implements ExpenseRespository {
     private Environment env;
 
     @Override
-    public List<Expense> getExpense(Map<String, String> params, int page) {
+    public List<Expense> getExpense(Map<String, String> params, int page, String kw) {
         Session session = this.SessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Expense> q = b.createQuery(Expense.class);
@@ -50,9 +50,13 @@ public class ExpenseRespositoryImpl implements ExpenseRespository {
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             
-            String kw = params.get("kw");
+//            String kw = params.get("kw");
+            
             if (kw != null && !kw.isEmpty()) {
-                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
+                Predicate p = b.like(root.get("name").as(String.class),
+                        String.format("%%%s%%", kw));
+                
+//                q = q.where(p);
                 predicates.add(p);
             }
             
@@ -160,4 +164,44 @@ public class ExpenseRespositoryImpl implements ExpenseRespository {
         Query query = session.createQuery(q);
         return query.getResultList();
     }
+    public List<Object> ListExpense(Date fromDate) {
+        
+        return null;
+    }
+
+    @Override
+    public List<Object[]> statsExpenseMonth(Date fromDate) {
+        Session session = this.SessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+      
+        Root root = q.from(Expense.class);
+//        int d = fromDate.getMonth();
+        
+        List<Predicate> predicates = new ArrayList<>();
+        
+        
+        
+        q.multiselect(b.function("MONTH", Integer.class, root.get("date")),
+                b.function("YEAR", Integer.class, root.get("date")),
+                root.get("name"),
+                b.sum(root.get("amount")));
+        
+        q.groupBy(b.function("MONTH", Integer.class, root.get("date")),
+                b.function("YEAR", Integer.class, root.get("date")));
+//        Predicate p = b.equal(b.function("MONTH", Integer.class, root.get("date")), d);
+//                predicates.add(p);
+        
+//        if(fromDate != null){
+//            predicates.add(b.greaterThanOrEqualTo(root.get("date"), fromDate));
+//        }
+        
+//        if(toDate != null){
+//            predicates.add(b.lessThanOrEqualTo(root.get("date"), toDate));
+//        }
+        
+        q.where(predicates.toArray(new Predicate[]{}));
+       
+        Query query = session.createQuery(q);
+        return query.getResultList();    }
 }

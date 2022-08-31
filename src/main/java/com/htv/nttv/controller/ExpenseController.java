@@ -90,7 +90,7 @@ public class ExpenseController {
     public String statsExpense(Model model, @RequestParam(required = false) Map<String, String> params){
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
         
-        Date fromDate = null, toDate = null;
+        Date fromDate = new Date(), toDate = new Date();
         
         try {
             String d = params.getOrDefault("fromDate", null);
@@ -108,6 +108,37 @@ public class ExpenseController {
           
         model.addAttribute("statsExpense", this.expenseService.statsExpense(fromDate, toDate));
         return "statsExpense";
+    }
+    @GetMapping("/statsExpenseMonth")
+    public String statsExpenseMonth(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException{
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+//        
+        Date fromDate = null, toDate = null;
+        try {
+            String d = params.getOrDefault("now", null);
+            if(d != null)
+                fromDate = f.parse(d);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        
+       
+//        try {
+//            String d = params.getOrDefault("fromDate", null);
+//            if (d != null) {
+//                fromDate = f.parse(d);
+//            }
+//
+//            String t = params.getOrDefault("toDate", null);
+//            if (t != null)
+//                toDate = f.parse(t);
+//        
+//        } catch (ParseException ex){
+//            ex.printStackTrace();
+//        }
+          
+        model.addAttribute("statsExpenseMonth", this.expenseService.statsExpenseMonth(fromDate));
+        return "statsExpenseMonth";
     }
     
 }

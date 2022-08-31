@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
   <div class="container-fluid">
@@ -47,10 +48,28 @@
             <li><a class="dropdown-item" href="#">Trò chuyện</a></li>
           </ul>
         </li>
-      
+        
+        <sec:authorize access="!isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="<c:url value="/login"/>">Dang nhap</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="<c:url value="/register"/>">Dang ky</a>
+            </li>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link text-info" href="<c:url value="/"/>">${pageContext.request.userPrincipal.name}</a>
+            </li>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link text-info" href="<c:url value="/logout"/>">Dang xuat</a>
+            </li>
+        </sec:authorize>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" action="">
+        <input class="form-control me-2" name="kw" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
