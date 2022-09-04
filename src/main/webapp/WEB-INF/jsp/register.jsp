@@ -41,7 +41,8 @@
                     </c:if>
                     <div class="card-body"> 
                         <form:form method="POST" 
-                                   modelAttribute="user">
+                                   modelAttribute="user" 
+                                   enctype="multipart/form-data">
                             <div class="form-row m-b-55">
                                 <div class="name">Name</div>
                                 <div class="value">
@@ -102,8 +103,15 @@
                                         <form:input class="input--style-5" path="confirmPassword" type="password" id="confirm-password" placeholder="Enter comfirm password"/>
                                     </div>
                                 </div>
+                            </div>                           
+                            <div class="form-row">
+                                <div class="name">Avatar</div>
+                                <div class="value">
+                                    <div class="input-group" style="border: 1px solid grey">
+                                        <form:input class="input--style-4" path="file" type="file" id="file"/>
+                                    </div>
+                                </div>
                             </div>
-
                             <div style="text-align: center;">
                                 <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
                             </div>

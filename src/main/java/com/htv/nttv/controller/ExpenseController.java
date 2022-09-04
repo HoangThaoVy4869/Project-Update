@@ -46,7 +46,7 @@ public class ExpenseController {
 
         if (!r.hasErrors()) {
             if (this.expenseService.addExpense(em) == true) {
-                return "redirect:/";
+                return "redirect:/home";
             } else {
                 model.addAttribute("errMsg", "Error!!!!!");
             }
@@ -66,7 +66,7 @@ public class ExpenseController {
 
         if (!r.hasErrors()) {
             if (this.expenseService.updateExpense(em) == true) {
-                return "redirect:/"; 
+                return "redirect:/home"; 
             } else {
                 model.addAttribute("errMsg", "Error!!!!!");
             }
@@ -77,7 +77,7 @@ public class ExpenseController {
     @GetMapping("/deleteExpense/{id}")
     public String deleteExpense(@PathVariable(value = "id") int id, Model model){
         model.addAttribute("expense", this.expenseService.deleteExpense(id));
-        return "redirect:/";
+        return "redirect:/home";
     }
     
     @GetMapping("/detailsExpense/{id}")
@@ -109,6 +109,8 @@ public class ExpenseController {
         model.addAttribute("statsExpense", this.expenseService.statsExpense(fromDate, toDate));
         return "statsExpense";
     }
+    
+    
     @GetMapping("/statsExpenseMonth")
     public String statsExpenseMonth(Model model, @RequestParam(required = false) Map<String, String> params) throws ParseException{
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");

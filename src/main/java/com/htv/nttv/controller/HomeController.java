@@ -34,8 +34,8 @@ public class HomeController {
     private CategoryService categoryService;
     @Autowired
     private ExpenseService expenseService;
-     @Autowired
-    private UserService userService;
+    @Autowired
+    private UserService userDetailsService;
 
 
     @ModelAttribute
@@ -44,6 +44,12 @@ public class HomeController {
     }
     
     @RequestMapping("/")
+    public String home()
+    {
+        return "home";
+    }
+    
+    @RequestMapping("/home")
     public String index(Model model, @RequestParam Map<String, String> params,
             HttpSession session) {
         String kw = params.getOrDefault("kw", null);
@@ -93,9 +99,8 @@ public class HomeController {
             BindingResult r) {
         String errMsg="";
 
-        
         if(u.getPassword().equals(u.getConfirmPassword())) {
-            if (this.userService.addUser(u) == true) {
+            if (this.userDetailsService.addUser(u) == true) {
                 return "redirect:/login";
             }else
                 errMsg = "An error has occurred!!!";

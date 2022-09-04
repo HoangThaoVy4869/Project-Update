@@ -7,6 +7,7 @@ package com.htv.nttv.respository;
 
 import com.htv.nttv.pojo.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,5 +15,9 @@ import java.util.List;
  */
 public interface UserRepository {
     boolean addUser(User u);
+    User getUserById(int id);
+    boolean deleteUser(int id);
+    boolean updateUser(User u);
     User findByUser(String username);
+    List<Object[]> getUser(Map<String, String> params, String kw);
 }

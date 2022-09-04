@@ -1,5 +1,6 @@
 package com.htv.nttv.pojo;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -39,6 +41,37 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
+    
+    public static final String ADMIN = "0";
+    public static final String USER = "1";
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    /**
+     * @return the avatar
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * @param avatar the avatar to set
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
 /**
      * @return the confirmPassword
@@ -101,11 +134,13 @@ public class User implements Serializable {
     private String confirmPassword;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<UserDetails> userDetailsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<UserTeam> userTeamCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Transaction> transactionCollection;
-
+    
+    private String avatar;
+    @Transient
+    private MultipartFile file;
     public User() {
     }
 
@@ -113,7 +148,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, String phone, String username, String password) {
+    public User(Integer id, String firstName, String lastName, String email, String phone, String username, String password, String userRole) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -121,7 +156,7 @@ public class User implements Serializable {
         this.phone = phone;
         this.username = username;
         this.password = password;
-//        this.userRole = userRole;
+        this.userRole = userRole;
     }
 
     public Integer getId() {
@@ -213,14 +248,7 @@ public class User implements Serializable {
         this.userDetailsCollection = userDetailsCollection;
     }
 
-    @XmlTransient
-    public Collection<UserTeam> getUserTeamCollection() {
-        return userTeamCollection;
-    }
 
-    public void setUserTeamCollection(Collection<UserTeam> userTeamCollection) {
-        this.userTeamCollection = userTeamCollection;
-    }
 
     @XmlTransient
     public Collection<Transaction> getTransactionCollection() {

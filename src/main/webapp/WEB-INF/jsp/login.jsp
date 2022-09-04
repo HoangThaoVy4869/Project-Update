@@ -15,14 +15,14 @@
     <head>
         <title>JSP Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
         <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-       
-        <link rel="stylesheet" type="text/css" href="<c:url value="resources/css/util.css"/>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="resources/css/login.css"/>">
-        
+
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/util.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login.css"/>">
+
     </head>
     <body>
         <div class="limiter">
@@ -30,6 +30,11 @@
                 <div class="wrap-login100">
                     <c:if test="${param.error != null}">
                         <div style="background-color: pink">Error!!!!</div>
+                    </c:if>
+                    <c:if test="${param.accessDenied != null}">
+                        <div style="background-color: pink">
+                            Ban khong co quyen truy cap!!!
+                        </div>
                     </c:if>
                     <form:form class="login100-form validate-form" 
                                method="POST">
@@ -52,7 +57,7 @@
                             <input class="input100" type="password" id="password" name="password"/>
                             <span class="focus-input100" data-placeholder="Password"></span>
                         </div>
-                            
+
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>

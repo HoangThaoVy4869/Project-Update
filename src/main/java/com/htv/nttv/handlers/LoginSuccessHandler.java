@@ -29,7 +29,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         User u = this.userDetailsService.findByUser(a.getName());
         request.getSession().setAttribute("currentUser", u);
         
-        response.sendRedirect("/ExpenseManager");
+        response.sendRedirect("/ExpenseManager/home");
     }
     
 }

@@ -88,5 +88,19 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="register" template="/WEB-INF/jsp/register.jsp">
         <put-attribute name="title" value="Dang ky nguoi dung" />
     </definition>
+    <definition name="home" template="/WEB-INF/jsp/home.jsp">
+        <put-attribute name="title" value="Trang mo dau" />
+    </definition>
+<!--    Amin-->
+    <definition name="listUser" extends="baseLayout">
+        <put-attribute name="title" value="Quan ly nguoi dung" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/listUser.jsp" />
+    </definition>
+    <definition name="updateUser" extends="baseLayout">
+        <put-attribute name="title" value="Sua thong tin nguoi dung" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/editUser.jsp" />
+    </definition>
     
 </tiles-definitions>

@@ -28,13 +28,8 @@
     <input type="submit" value="Thống kê" class="btn btn-success">
 </form>-->
 
-<select id="cars">
-    <option value="thang"><a href="#">Tháng</a></option>
-    <option value="quy"><a href="#">Quý</a></option>
-    <option value="nam"><a href="#">Năm</a></option>
-</select>
 <c:set var="now" value="<%=new java.util.Date()%>" />
-<p name="now">Formatted Date (7): <fmt:formatDate  pattern="yyyy-MM-dd" value="${now}" /></p>
+<p name="now">Ngày hiện tại: <fmt:formatDate  pattern="yyyy-MM-dd" value="${now}" /></p>
 
 <table class="table">
     <tr>
@@ -43,8 +38,8 @@
     </tr>
     <c:forEach items="${statsExpenseMonth}" var="s">
         <tr>
-            <td>${s[2]}</td>
-            <td>${s[3]} VNĐ</td>
+            <td>${s[0]}/${s[1]}</td>
+            <td> ${s[3]} VNĐ</td>
         </tr>
     </c:forEach>
 </table>
@@ -53,7 +48,7 @@
 <script>
     let expenseLabels=[], expenseInfo=[]
     <c:forEach items="${statsExpenseMonth}" var="s">
-        expenseLabels.push('${s[2]}')
+        expenseLabels.push('${s[0]}/${s[1]}')
         expenseInfo.push(${s[3]})
     </c:forEach>
     window.onload = function() {

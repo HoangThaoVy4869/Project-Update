@@ -10,9 +10,6 @@
 <body>
     <div class="container pt-4 mt-3">
         <h2>Striped Rows</h2>
-        <c:if test="${currentUser != null}">
-            ${currentUser.email} - ${currentUser.firstName}
-        </c:if>
         <div class="form-group row">
             <div class="col">
                 <a href="<c:url value="/user/expense"/>"><button type="submit" class="btn btn-primary">Add new</button></a>

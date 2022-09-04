@@ -7,6 +7,7 @@ package com.htv.nttv.service;
 
 import com.htv.nttv.pojo.User;
 import java.util.List;
+import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -15,7 +16,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService{
     boolean addUser(User u);
-//    boolean isUser(String email, String password);
+    User getUserById(int id);
+    boolean deleteUser(int id);
+    boolean updateUser(User u);
+    List<Object[]> getUser(Map<String, String> params, String kw);
     User findByUser(String username);
 
 }

@@ -5,7 +5,6 @@
  */
 package com.htv.nttv.controller;
 
-import com.htv.nttv.pojo.Team;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;

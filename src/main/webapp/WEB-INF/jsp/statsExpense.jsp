@@ -25,11 +25,8 @@
     <input type="submit" value="Thống kê" class="btn btn-success">
 </form>
 <br />
-<select id="cars">
-    <option value="thang"><a href="/statsExpenseMonth">Tháng</a></option>
-    <option value="quy"><a href="#">Quý</a></option>
-    <option value="nam"><a href="#">Năm</a></option>
-</select>
+
+<a href="statsExpenseMonth"><button class="btn btn-warning">Thống kê theo tháng</button></a>
 
 <table class="table">
     <tr>
